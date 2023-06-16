@@ -4,10 +4,10 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
-import { BASE_BACK_URL } from "~/constants/service.constants.ts";
+import { VITE_BASE_BACK_URL } from "~/constants/service.constants.ts";
 
 const service = axios.create({
-  baseURL: BASE_BACK_URL,
+  baseURL: VITE_BASE_BACK_URL,
   headers: {
     "Content-Type": "application/json",
   },

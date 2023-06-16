@@ -1,5 +1,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { getQueenAtkResult } from "~/service/crud.service.ts";
+import { VITE_BASE_BACK_URL } from "~/constants/service.constants.ts";
 
 function Home(): ReactElement {
   const [data, setData] = useState<any | null>(null);
@@ -8,6 +9,7 @@ function Home(): ReactElement {
       return await getQueenAtkResult();
     };
     console.log(data());
+    console.log("url", VITE_BASE_BACK_URL);
   }, []);
   return (
     <>

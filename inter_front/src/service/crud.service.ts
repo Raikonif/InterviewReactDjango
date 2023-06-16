@@ -1,8 +1,8 @@
 import { service } from "~/service/index.ts";
-import axios from "axios";
+import { VITE_BASE_BACK_URL } from "~/constants/service.constants.ts";
 
 const getQueenAtkResult = async () => {
-  const response = await axios.get("http://localhost:8000/api/all");
+  const response = await service(`${VITE_BASE_BACK_URL}/api/all`);
   console.log(response.data);
   return response.data;
 };
