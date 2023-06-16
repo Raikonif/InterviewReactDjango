@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework import viewsets
-from api.models.models import Item
+from api.models.models import Queen
 from api.serializers import ItemSerializer
 
 from rest_framework import serializers
@@ -12,7 +12,7 @@ from rest_framework import status
 
 class ItemView(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
-    queryset = Item.objects.all()
+    queryset = Queen.objects.all()
 
 
 @api_view(['GET'])
@@ -33,7 +33,7 @@ def add_items(request):
     item = ItemSerializer(data=request.data)
 
     # validating for already existing data
-    if Item.objects.filter(**request.data).exists():
+    if Queen.objects.filter(**request.data).exists():
         raise serializers.ValidationError('This data already exists')
 
     if item.is_valid():
@@ -47,9 +47,9 @@ def add_items(request):
 def view_items(request):
     # checking for the parameters from the URL
     if request.query_params:
-        items = Item.objects.filter(**request.query_params.dict())
+        items = Queen.objects.filter(**request.query_params.dict())
     else:
-        items = Item.objects.all()
+        items = Queen.objects.all()
 
     # if there is something in items else raise error
     if items:
@@ -61,7 +61,7 @@ def view_items(request):
 
 @api_view(['POST'])
 def update_items(request, pk):
-    item = Item.objects.get(pk=pk)
+    item = Queen.objects.get(pk=pk)
     data = ItemSerializer(instance=item, data=request.data)
 
     if data.is_valid():
@@ -73,6 +73,6 @@ def update_items(request, pk):
 
 @api_view(['DELETE'])
 def delete_items(request, pk):
-    item = get_object_or_404(Item, pk=pk)
+    item = get_object_or_404(Queen, pk=pk)
     item.delete()
     return Response(status=status.HTTP_202_ACCEPTED)

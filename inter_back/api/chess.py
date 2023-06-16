@@ -1,5 +1,3 @@
-import sys
-
 n, k = input().strip().split(' ')
 n, k = [int(n), int(k)]
 rQueen, cQueen = input().strip().split(' ')
@@ -8,7 +6,6 @@ ObList = []
 for a0 in range(k):
     rObstacle, cObstacle = input().strip().split(' ')
     rObstacle, cObstacle = [int(rObstacle), int(cObstacle)]
-    # your code goes here
     ObList.append((rObstacle, cObstacle))
 ObSet = set(ObList)
 Delta = [(0, 1), (1, 1), (1, 0), (0, -1), (-1, -1), (-1, 0), (1, -1), (-1, 1)]

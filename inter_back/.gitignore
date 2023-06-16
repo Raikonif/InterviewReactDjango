@@ -1,3 +1,6 @@
 Pipfile
 Pipfile.lock
 inter_back/.env
+.idea
+.vscode
+.fleet
