@@ -28,8 +28,12 @@ function Problem1(): ReactElement {
             <h3 className="text-white">Send your Inputs</h3>
           </button>
           <div className="flex flex-col items-center">
-            <span className="mx-2 text-white">The Result is:</span>
-            <pre className="font-bold text-white">{response ? "result" : "doesn't work"}</pre>
+            <span className="mx-2 text-white" id="problem-1">
+              The Result is:
+            </span>
+            <pre className="font-bold text-white" id="problem-1">
+              {response ? "result" : "doesn't work"}
+            </pre>
           </div>
         </form>
       </div>

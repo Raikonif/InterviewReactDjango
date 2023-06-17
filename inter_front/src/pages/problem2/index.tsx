@@ -19,8 +19,12 @@ function Problem2(): ReactElement {
             <h3 className="text-white">Send your Input</h3>
           </button>
           <div className="flex flex-col items-center">
-            <span className="mx-2 text-white">The Result is:</span>
-            <pre className="font-bold text-white">{response ? "Result" : "?"}</pre>
+            <span className="mx-2 text-white" id="problem-2">
+              The Result is:
+            </span>
+            <pre className="font-bold text-white" id="problem-2">
+              {response ? "Result" : "?"}
+            </pre>
           </div>
         </div>
       </div>

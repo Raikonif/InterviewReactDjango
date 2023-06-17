@@ -13,11 +13,11 @@ const GenericRoutes = {
       element: <Home />,
     },
     {
-      path: "problem1",
+      path: "problem-1",
       element: <Problem1 />,
     },
     {
-      path: "problem2",
+      path: "problem-2",
       element: <Problem2 />,
     },
   ],

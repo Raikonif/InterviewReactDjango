@@ -3,12 +3,12 @@ const generalConstants = {
     {
       id: 1,
       name: "Problem1",
-      path: "/problem1",
+      path: "/problem-1",
     },
     {
       id: 2,
       name: "Problem2",
-      path: "/problem2",
+      path: "/problem-2",
     },
   ],
 };
