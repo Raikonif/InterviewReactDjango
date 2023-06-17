@@ -14,12 +14,7 @@ function Home(): ReactElement {
   return (
     <>
       <div className="flex w-full flex-col items-center justify-center bg-slate-600">
-        {/*<h1 className="text-white">Thanks For The Opportunity</h1>*/}
-        {/*{data.map((d: any) => (*/}
-        {/*  <div className="flex flex-col items-center justify-center bg-slate-600" key={d.id}>*/}
-        {/*    <h1 className="text-white">{d}</h1>*/}
-        {/*  </div>*/}
-        {/*))}*/}
+        <h1 className="text-white">Thanks For The Opportunity</h1>
       </div>
     </>
   );
