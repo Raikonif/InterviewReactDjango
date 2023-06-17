@@ -1,18 +1,10 @@
-# Create your views here.
 from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework import viewsets
-from api.models.models import Queen
-from api.serializers import ItemSerializer
-
+from api.models.models import Item, Queen
+from api.serializers import ItemSerializer, QueenSerializer
 from rest_framework import serializers
 from rest_framework import status
-
-
-class ItemView(viewsets.ModelViewSet):
-    serializer_class = ItemSerializer
-    queryset = Queen.objects.all()
 
 
 @api_view(['GET'])
@@ -33,7 +25,7 @@ def add_items(request):
     item = ItemSerializer(data=request.data)
 
     # validating for already existing data
-    if Queen.objects.filter(**request.data).exists():
+    if Item.objects.filter(**request.data).exists():
         raise serializers.ValidationError('This data already exists')
 
     if item.is_valid():
@@ -47,9 +39,9 @@ def add_items(request):
 def view_items(request):
     # checking for the parameters from the URL
     if request.query_params:
-        items = Queen.objects.filter(**request.query_params.dict())
+        items = Item.objects.filter(**request.query_params.dict())
     else:
-        items = Queen.objects.all()
+        items = Item.objects.all()
 
     # if there is something in items else raise error
     if items:
@@ -61,7 +53,7 @@ def view_items(request):
 
 @api_view(['POST'])
 def update_items(request, pk):
-    item = Queen.objects.get(pk=pk)
+    item = Item.objects.get(pk=pk)
     data = ItemSerializer(instance=item, data=request.data)
 
     if data.is_valid():
@@ -73,6 +65,46 @@ def update_items(request, pk):
 
 @api_view(['DELETE'])
 def delete_items(request, pk):
-    item = get_object_or_404(Queen, pk=pk)
+    item = get_object_or_404(Item, pk=pk)
     item.delete()
     return Response(status=status.HTTP_202_ACCEPTED)
+
+
+# Queen Chess
+@api_view(['POST'])
+def add_move(request):
+    queen_move = QueenSerializer(data=request.data)
+    if Queen.objects.filter(**request.data).exists():
+        raise serializers.ValidationError('This data already exists')
+
+    if queen_move.is_valid():
+        queen_move.save()
+        return Response(queen_move.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+def view_queen_moves(request):
+    if request.query_params:
+        queen_moves = Queen.objects.filter(**request.query_params.dict())
+    else:
+        queen_moves = Queen.objects.all()
+
+    if queen_moves:
+        serializer = QueenSerializer(queen_moves, many=True)
+        return Response(serializer.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+def update_queen_moves(request, pk):
+    queen_move = Queen.objects.get(pk=pk)
+    data = QueenSerializer(instance=queen_move, data=request.data)
+
+    if data.is_valid():
+        data.save()
+        return Response(data.data)
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
